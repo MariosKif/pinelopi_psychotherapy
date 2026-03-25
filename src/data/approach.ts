@@ -16,7 +16,7 @@ const approachI18n = {
 
     hero: {
       heading: 'Η προσέγγισή μου',
-      subheading: 'Συστημική. Ολοκληρωμένη. Προσαρμοσμένη σε εσάς.',
+      subheading: '',
     },
 
     intro: {
