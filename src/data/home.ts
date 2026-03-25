@@ -108,7 +108,7 @@ const homeI18n = {
       subheading:
         'Η έναρξη θεραπείας εγείρει πολλές ερωτήσεις. Εδώ είναι μερικές που ακούω συχνά.',
       cta: { label: 'Δείτε όλες τις ερωτήσεις', href: '/faq' },
-      featuredIndices: [0, 1, 8],
+      featuredIndices: [0, 1, 7],
     },
 
     contactCta: {
@@ -219,7 +219,7 @@ const homeI18n = {
       subheading:
         'Starting therapy raises many questions. Here are a few I hear often.',
       cta: { label: 'See all questions', href: '/faq' },
-      featuredIndices: [0, 1, 8],
+      featuredIndices: [0, 1, 7],
     },
 
     contactCta: {

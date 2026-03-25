@@ -52,11 +52,6 @@ const faqI18n = {
           'Η ψυχοθεραπεία δεν είναι υπηρεσία έκτακτης ανάγκης. Αν βρίσκεστε σε άμεσο κίνδυνο, επικοινωνήστε με τις υπηρεσίες έκτακτης ανάγκης (112) ή μια γραμμή κρίσης. Μεταξύ συνεδριών, μπορείτε να με βρείτε μέσω email για μη επείγοντα θέματα και θα απαντήσω εντός μίας εργάσιμης ημέρας.',
       },
       {
-        question: 'Πόσο κοστίζουν οι συνεδρίες και ποια είναι η πολιτική ακύρωσης;',
-        answer:
-          'Οι ατομικές συνεδρίες κοστίζουν €80 (50 λεπτά) και οι συνεδρίες ζεύγους €110 (75 λεπτά). Προσφέρω περιορισμένο αριθμό θέσεων μειωμένου κόστους. Οι ακυρώσεις απαιτούν τουλάχιστον 24 ώρες προειδοποίηση. Πλήρεις λεπτομέρειες στη σελίδα Κόστος.',
-      },
-      {
         question: 'Πώς κλείνω ραντεβού;',
         answer:
           'Μπορείτε να επικοινωνήσετε μέσω της φόρμας επικοινωνίας, email ή τηλεφώνου. Συνήθως απαντώ εντός 24 ωρών. Θα ξεκινήσουμε με μια σύντομη, δωρεάν εισαγωγική κλήση (περίπου 15 λεπτά) για να βεβαιωθούμε ότι η θεραπεία είναι το σωστό βήμα.',
@@ -128,11 +123,6 @@ const faqI18n = {
         question: 'What if I have an emergency or crisis between sessions?',
         answer:
           'Psychotherapy is not an emergency or crisis service. If you are in immediate danger or experiencing a mental health emergency, please contact your local emergency services (112) or a crisis helpline. Between sessions, you can reach me via email for non-urgent matters, and I\'ll respond within one working day.',
-      },
-      {
-        question: 'How much do sessions cost, and what\'s your cancellation policy?',
-        answer:
-          'Individual sessions are €80 (50 min) and couples sessions are €110 (75 min). I offer a limited number of reduced-fee places. Cancellations require at least 24 hours\' notice; late cancellations are charged at the full fee. Full details are on the Fees page.',
       },
       {
         question: 'How do I schedule an appointment?',
