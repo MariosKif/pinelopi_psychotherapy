@@ -57,9 +57,7 @@ const siteI18n = {
     skipToContent: 'Μετάβαση στο κυρίως περιεχόμενο',
 
     hours: [
-      { days: 'Δευτέρα – Παρασκευή', time: '9:00 – 20:00' },
-      { days: 'Σάββατο', time: '10:00 – 15:00' },
-      { days: 'Κυριακή', time: 'Κλειστά' },
+      { days: 'Δευτέρα – Παρασκευή', time: 'Κατόπιν συνεννόησης' },
     ],
 
     footer: {
@@ -106,9 +104,7 @@ const siteI18n = {
     skipToContent: 'Skip to main content',
 
     hours: [
-      { days: 'Monday – Friday', time: '9:00 – 20:00' },
-      { days: 'Saturday', time: '10:00 – 15:00' },
-      { days: 'Sunday', time: 'Closed' },
+      { days: 'Monday – Friday', time: 'Upon arrangement' },
     ],
 
     footer: {

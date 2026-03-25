@@ -83,6 +83,17 @@ const shared = siteShared;
             </div>
           </Card>
 
+          <!-- Hours -->
+          <Card padding="md">
+            <h2 class="font-heading text-lg font-medium text-text mb-4">{contact.sidebar.hoursLabel}</h2>
+            <div class="space-y-2 text-sm">
+              <div class="flex justify-between">
+                <span class="text-text-secondary">{lang === 'el' ? 'Δευτέρα – Παρασκευή' : 'Monday – Friday'}</span>
+                <span class="text-text font-medium">{lang === 'el' ? 'Κατόπιν συνεννόησης' : 'Upon arrangement'}</span>
+              </div>
+            </div>
+          </Card>
+
           <!-- Map placeholder -->
           {shared.contact.mapEmbedUrl ? (
             <div class="aspect-[4/3] rounded-[--radius-lg] overflow-hidden border border-border/60">
