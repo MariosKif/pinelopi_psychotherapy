@@ -50,7 +50,6 @@ const siteI18n = {
       { label: 'Σχετικά', href: '/about' },
       { label: 'Υπηρεσίες', href: '/services' },
       { label: 'Προσέγγιση', href: '/approach' },
-      { label: 'Κόστος', href: '/fees' },
       { label: 'Ερωτήσεις', href: '/faq' },
     ],
 
@@ -100,7 +99,6 @@ const siteI18n = {
       { label: 'About', href: '/about' },
       { label: 'Services', href: '/services' },
       { label: 'Approach', href: '/approach' },
-      { label: 'Fees', href: '/fees' },
       { label: 'FAQ', href: '/faq' },
     ],
 
