@@ -54,7 +54,7 @@ const faqI18n = {
       {
         question: 'Πώς κλείνω ραντεβού;',
         answer:
-          'Μπορείτε να επικοινωνήσετε μέσω της φόρμας επικοινωνίας, email ή τηλεφώνου. Συνήθως απαντώ εντός 24 ωρών. Θα ξεκινήσουμε με μια σύντομη, δωρεάν εισαγωγική κλήση (περίπου 15 λεπτά) για να βεβαιωθούμε ότι η θεραπεία είναι το σωστό βήμα.',
+          'Μπορείτε να επικοινωνήσετε μέσω της φόρμας επικοινωνίας, email ή τηλεφώνου. Συνήθως απαντώ εντός 24 ωρών.',
       },
       {
         question: 'Τι γίνεται αν αγχώνομαι για την έναρξη;',
@@ -65,11 +65,6 @@ const faqI18n = {
         question: 'Πώς πρέπει να προετοιμαστώ για την πρώτη συνεδρία;',
         answer:
           'Δεν χρειάζεται ειδική προετοιμασία. Μερικοί βρίσκουν χρήσιμο να σημειώσουν λίγα πράγματα που τους απασχολούν, αλλά είναι εξίσου εντάξει να έρθετε όπως είστε. Το πιο σημαντικό είναι να έρθετε με ανοιχτό μυαλό.',
-      },
-      {
-        question: 'Μπορώ να φέρω κάποιον μαζί μου;',
-        answer:
-          'Οι ατομικές συνεδρίες είναι ένας-προς-έναν, αλλά αν νιώθετε πιο άνετα να σας συνοδεύσει κάποιος στο χώρο αναμονής για την πρώτη σας επίσκεψη, αυτό είναι απολύτως εντάξει. Στη θεραπεία ζεύγους, και οι δύο σύντροφοι παρακολουθούν μαζί.',
       },
     ],
 
@@ -127,7 +122,7 @@ const faqI18n = {
       {
         question: 'How do I schedule an appointment?',
         answer:
-          'You can reach me through the contact form on this website, by email, or by phone. I typically respond within 24 hours. We\'ll start with a brief, free introductory call (about 15 minutes) to ensure therapy is the right step and that we feel like a good fit.',
+          'You can reach me through the contact form on this website, by email, or by phone. I typically respond within 24 hours.',
       },
       {
         question: 'What if I\'m nervous about starting?',
@@ -138,11 +133,6 @@ const faqI18n = {
         question: 'How should I prepare for my first session?',
         answer:
           'There\'s no special preparation needed. Some people find it helpful to jot down a few notes about what\'s on their mind, but it\'s equally fine to come as you are. The most important thing is to arrive with an open mind — even just a small willingness to explore.',
-      },
-      {
-        question: 'Can I bring someone with me?',
-        answer:
-          'Individual sessions are one-to-one, but if you\'d feel more comfortable having someone accompany you to the waiting area for your first visit, that\'s absolutely fine. For couples therapy, both partners attend together.',
       },
     ],
 
