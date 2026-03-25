@@ -11,7 +11,7 @@ const homeI18n = {
     hero: {
       headline: 'Ένας ήρεμος χώρος για να ξεκινήσετε',
       subheadline:
-        'Η θεραπεία δεν αφορά το να είσαι «χαλασμένος». Αφορά το να έχεις έναν ασφαλή, εμπιστευτικό χώρο για να κατανοήσεις τον εαυτό σου πιο βαθιά — και να προχωρήσεις με μεγαλύτερη διαύγεια και ηρεμία.',
+        '«Το παράδοξο είναι ότι, όταν αποδεχτώ τον εαυτό μου για αυτό που είμαι, τότε ακριβώς μπορώ να αλλάξω.» — Carl Rogers',
       cta: {
         primary: { label: 'Κλείστε ραντεβού', href: '/contact' },
         secondary: { label: 'Πώς λειτουργεί η θεραπεία', href: '/approach' },
@@ -28,7 +28,11 @@ const homeI18n = {
         detail: 'Ειδίκευση στη Συστημική Ψυχοθεραπεία & Θεραπεία Οικογένειας',
       },
       {
-        label: 'Εμπιστευτική & ασφαλής',
+        label: 'Διαταραχές Πρόσληψης Τροφής',
+        detail: 'Εξειδικευμένη εκπαίδευση στο Αιγινήτειο Νοσοκομείο',
+      },
+      {
+        label: 'Εμπιστοσύνη & ασφάλεια',
         detail: 'Διαθέσιμες δια ζώσης και online συνεδρίες',
       },
     ],
@@ -137,6 +141,10 @@ const homeI18n = {
       {
         label: 'Systemic Approach',
         detail: 'Specialised in Systemic Psychotherapy & Family Therapy',
+      },
+      {
+        label: 'Eating Disorders',
+        detail: 'Specialised training at Aeginitio Hospital',
       },
       {
         label: 'Confidential & secure',

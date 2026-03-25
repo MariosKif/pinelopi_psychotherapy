@@ -11,7 +11,7 @@ const contactI18n = {
     meta: {
       title: 'Επικοινωνία — Anemi Therapy Studio',
       description:
-        'Επικοινωνήστε με το Anemi Therapy Studio. Κλείστε ραντεβού ή κάντε μια ερώτηση. Στο Κολωνάκι, Αθήνα — διαθέσιμες και online συνεδρίες.',
+        'Επικοινωνήστε με το Anemi Therapy Studio. Κλείστε ραντεβού ή κάντε μια ερώτηση. Στη Νίκαια, Πειραιάς — διαθέσιμες και online συνεδρίες.',
     },
 
     hero: {
@@ -64,7 +64,7 @@ const contactI18n = {
     meta: {
       title: 'Contact — Anemi Therapy Studio',
       description:
-        'Get in touch with Anemi Therapy Studio. Request an appointment or ask a question. Located in Kolonaki, Athens — online sessions also available.',
+        'Get in touch with Anemi Therapy Studio. Request an appointment or ask a question. Located in Nikaia, Piraeus — online sessions also available.',
     },
 
     hero: {

@@ -49,8 +49,8 @@ const shared = siteShared;
           <!-- Office entrance image -->
           <div class="rounded-[--radius-lg] overflow-hidden border border-border/40">
             <img
-              src="/images/office-entrance.jpg"
-              alt={lang === 'el' ? 'Η είσοδος του γραφείου' : 'Office entrance'}
+              src="/images/therapy-room-angle.jpg"
+              alt={lang === 'el' ? 'Ο χώρος θεραπείας' : 'The therapy space'}
               class="w-full h-auto object-cover"
               loading="lazy"
             />
@@ -80,19 +80,6 @@ const shared = siteShared;
                   {shared.contact.address.postalCode}, {shared.contact.address.country}
                 </p>
               </div>
-            </div>
-          </Card>
-
-          <!-- Hours -->
-          <Card padding="md">
-            <h2 class="font-heading text-lg font-medium text-text mb-4">{contact.sidebar.hoursLabel}</h2>
-            <div class="space-y-2 text-sm">
-              {site.hours.map((h) => (
-                <div class="flex justify-between">
-                  <span class="text-text-secondary">{h.days}</span>
-                  <span class="text-text font-medium">{h.time}</span>
-                </div>
-              ))}
             </div>
           </Card>
 
