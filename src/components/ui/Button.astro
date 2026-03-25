@@ -1,0 +1,58 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+  type?: 'button' | 'submit';
+  disabled?: boolean;
+  id?: string;
+}
+
+const {
+  href,
+  variant = 'primary',
+  size = 'md',
+  class: className = '',
+  type = 'button',
+  disabled = false,
+  id,
+} = Astro.props;
+
+const base =
+  'inline-flex items-center justify-center font-medium transition-all duration-200 ease-out rounded-[--radius-md] focus-visible:outline-2 focus-visible:outline-sage focus-visible:outline-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
+
+const variants = {
+  primary:
+    'bg-sage text-white hover:bg-sage-dark active:scale-[0.98] shadow-soft hover:shadow-card',
+  secondary:
+    'border border-sage/30 text-sage-dark hover:bg-sage-light/50 active:scale-[0.98]',
+  ghost:
+    'text-sage-dark hover:bg-sage-light/40 active:scale-[0.98]',
+};
+
+const sizes = {
+  sm: 'px-4 py-2 text-sm',
+  md: 'px-6 py-3 text-sm',
+  lg: 'px-8 py-3.5 text-base',
+};
+---
+
+{href ? (
+  <a
+    id={id}
+    href={href}
+    class:list={[base, variants[variant], sizes[size], className]}
+  >
+    <slot />
+  </a>
+) : (
+  <button
+    id={id}
+    type={type}
+    disabled={disabled}
+    class:list={[base, variants[variant], sizes[size], className]}
+  >
+    <slot />
+  </button>
+)}

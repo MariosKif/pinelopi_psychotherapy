@@ -1,0 +1,201 @@
+---
+import type { Lang } from '../i18n/utils';
+import { getContact } from '../data/contact';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const contact = getContact(lang);
+---
+
+<form id="contact-form" class="space-y-5" novalidate>
+  <!-- Honeypot — hidden from users, catches bots -->
+  <div class="absolute -left-[9999px]" aria-hidden="true">
+    <label>
+      Leave this empty
+      <input type="text" name="website" tabindex="-1" autocomplete="off" />
+    </label>
+  </div>
+
+  <!-- Name -->
+  <div class="flex flex-col gap-1.5">
+    <label for="name" class="text-sm font-medium text-text-secondary">
+      {contact.form.nameLabel} <span class="text-sage ml-0.5">*</span>
+    </label>
+    <input
+      id="name"
+      name="name"
+      type="text"
+      placeholder={contact.form.namePlaceholder}
+      required
+      class="w-full px-4 py-3 bg-surface border border-border rounded-[--radius-md] text-text placeholder:text-text-muted/60 transition-colors duration-200 hover:border-border-dark focus:border-sage focus:outline-none focus:ring-2 focus:ring-sage/20 text-sm"
+    />
+    <p class="text-xs text-error hidden" data-error="name">Please enter your name.</p>
+  </div>
+
+  <!-- Email -->
+  <div class="flex flex-col gap-1.5">
+    <label for="email" class="text-sm font-medium text-text-secondary">
+      {contact.form.emailLabel} <span class="text-sage ml-0.5">*</span>
+    </label>
+    <input
+      id="email"
+      name="email"
+      type="email"
+      placeholder={contact.form.emailPlaceholder}
+      required
+      class="w-full px-4 py-3 bg-surface border border-border rounded-[--radius-md] text-text placeholder:text-text-muted/60 transition-colors duration-200 hover:border-border-dark focus:border-sage focus:outline-none focus:ring-2 focus:ring-sage/20 text-sm"
+    />
+    <p class="text-xs text-error hidden" data-error="email">Please enter a valid email address.</p>
+  </div>
+
+  <!-- Phone (optional) -->
+  <div class="flex flex-col gap-1.5">
+    <label for="phone" class="text-sm font-medium text-text-secondary">
+      {contact.form.phoneLabel}
+    </label>
+    <input
+      id="phone"
+      name="phone"
+      type="tel"
+      placeholder={contact.form.phonePlaceholder}
+      class="w-full px-4 py-3 bg-surface border border-border rounded-[--radius-md] text-text placeholder:text-text-muted/60 transition-colors duration-200 hover:border-border-dark focus:border-sage focus:outline-none focus:ring-2 focus:ring-sage/20 text-sm"
+    />
+  </div>
+
+  <!-- Preferred times (optional) -->
+  <div class="flex flex-col gap-1.5">
+    <label for="times" class="text-sm font-medium text-text-secondary">
+      {contact.form.timesLabel}
+    </label>
+    <input
+      id="times"
+      name="preferred_times"
+      type="text"
+      placeholder={contact.form.timesPlaceholder}
+      class="w-full px-4 py-3 bg-surface border border-border rounded-[--radius-md] text-text placeholder:text-text-muted/60 transition-colors duration-200 hover:border-border-dark focus:border-sage focus:outline-none focus:ring-2 focus:ring-sage/20 text-sm"
+    />
+  </div>
+
+  <!-- Message -->
+  <div class="flex flex-col gap-1.5">
+    <label for="message" class="text-sm font-medium text-text-secondary">
+      {contact.form.messageLabel} <span class="text-sage ml-0.5">*</span>
+    </label>
+    <textarea
+      id="message"
+      name="message"
+      rows="5"
+      placeholder={contact.form.messagePlaceholder}
+      required
+      class="w-full px-4 py-3 bg-surface border border-border rounded-[--radius-md] text-text placeholder:text-text-muted/60 transition-colors duration-200 hover:border-border-dark focus:border-sage focus:outline-none focus:ring-2 focus:ring-sage/20 text-sm resize-y"
+    ></textarea>
+    <p class="text-xs text-error hidden" data-error="message">Please enter a message.</p>
+  </div>
+
+  <!-- Consent -->
+  <div class="flex items-start gap-3">
+    <input
+      id="consent"
+      name="consent"
+      type="checkbox"
+      required
+      class="mt-1 w-4 h-4 rounded border-border text-sage focus:ring-sage/30 cursor-pointer accent-sage"
+    />
+    <label for="consent" class="text-sm text-text-secondary leading-relaxed cursor-pointer">
+      {contact.form.consentLabel}
+    </label>
+  </div>
+  <p class="text-xs text-error hidden -mt-3" data-error="consent">Please confirm your consent to proceed.</p>
+
+  <!-- Submit button -->
+  <button
+    type="submit"
+    id="submit-btn"
+    class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3 text-sm font-medium text-white bg-sage rounded-[--radius-md] hover:bg-sage-dark transition-all duration-200 shadow-soft hover:shadow-card focus-visible:outline-2 focus-visible:outline-sage focus-visible:outline-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+  >
+    <span id="submit-text">{contact.form.submitLabel}</span>
+    <span id="submit-loading" class="hidden">{contact.form.submittingLabel}</span>
+  </button>
+
+  <!-- Success message -->
+  <div id="form-success" class="hidden p-5 bg-success-light border border-success/20 rounded-[--radius-md]">
+    <p class="font-heading text-lg font-medium text-text mb-1">{contact.form.successHeading}</p>
+    <p class="text-sm text-text-secondary">{contact.form.successMessage}</p>
+  </div>
+
+  <!-- Error message -->
+  <div id="form-error" class="hidden p-5 bg-error-light border border-error/20 rounded-[--radius-md]">
+    <p class="text-sm text-error">{contact.form.errorMessage}</p>
+  </div>
+</form>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+  const submitText = document.getElementById('submit-text')!;
+  const submitLoading = document.getElementById('submit-loading')!;
+  const successEl = document.getElementById('form-success')!;
+  const errorEl = document.getElementById('form-error')!;
+
+  function showError(field: string) {
+    const el = document.querySelector(`[data-error="${field}"]`);
+    el?.classList.remove('hidden');
+  }
+
+  function clearErrors() {
+    document.querySelectorAll('[data-error]').forEach((el) => el.classList.add('hidden'));
+    errorEl.classList.add('hidden');
+  }
+
+  function isValidEmail(email: string): boolean {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    clearErrors();
+
+    const data = new FormData(form);
+
+    // Honeypot check
+    if (data.get('website')) return;
+
+    // Validate
+    let valid = true;
+    const name = (data.get('name') as string)?.trim();
+    const email = (data.get('email') as string)?.trim();
+    const message = (data.get('message') as string)?.trim();
+    const consent = data.get('consent');
+
+    if (!name) { showError('name'); valid = false; }
+    if (!email || !isValidEmail(email)) { showError('email'); valid = false; }
+    if (!message) { showError('message'); valid = false; }
+    if (!consent) { showError('consent'); valid = false; }
+
+    if (!valid) return;
+
+    // Set loading state
+    submitBtn.disabled = true;
+    submitText.classList.add('hidden');
+    submitLoading.classList.remove('hidden');
+
+    try {
+      // TODO: Connect to email service (Formspree, Resend, etc.)
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      // Success
+      form.reset();
+      form.classList.add('hidden');
+      successEl.classList.remove('hidden');
+    } catch {
+      errorEl.classList.remove('hidden');
+    } finally {
+      submitBtn.disabled = false;
+      submitText.classList.remove('hidden');
+      submitLoading.classList.add('hidden');
+    }
+  });
+</script>

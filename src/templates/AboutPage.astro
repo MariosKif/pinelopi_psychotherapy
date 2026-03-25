@@ -1,0 +1,128 @@
+---
+import type { Lang } from '../i18n/utils';
+import { localizedPath } from '../i18n/utils';
+import Layout from '../layouts/Layout.astro';
+import { getAbout } from '../data/about';
+import { getSite } from '../data/site';
+import Container from '../components/ui/Container.astro';
+import Section from '../components/ui/Section.astro';
+import Card from '../components/ui/Card.astro';
+import Button from '../components/ui/Button.astro';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const about = getAbout(lang);
+const site = getSite(lang);
+---
+
+<Layout lang={lang} title={about.meta.title} description={about.meta.description}>
+  <!-- Hero -->
+  <Section background="default" padding="md">
+    <Container narrow>
+      <div class="text-center animate-on-scroll">
+        <h1 class="font-heading text-4xl sm:text-5xl font-medium text-text">
+          {about.hero.heading}
+        </h1>
+        <p class="mt-4 text-lg text-text-secondary leading-relaxed max-w-xl mx-auto">
+          {about.hero.subheading}
+        </p>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Therapist story -->
+  <Section background="default" padding="md">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 items-start">
+        <!-- Photo -->
+        <div class="lg:col-span-2 animate-on-scroll">
+          <div class="relative aspect-[3/4] max-w-xs mx-auto lg:mx-0 rounded-[--radius-xl] overflow-hidden bg-surface-alt border border-border/40">
+            <img
+              src="/images/therapy-room-angle.jpg"
+              alt={lang === 'el' ? 'Ο χώρος θεραπείας' : 'The therapy space'}
+              class="absolute inset-0 w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
+
+        <!-- Story text -->
+        <div class="lg:col-span-3 animate-on-scroll" style="transition-delay: 0.1s;">
+          <h2 class="font-heading text-2xl sm:text-3xl font-medium text-text mb-6">
+            {about.story.heading}
+          </h2>
+          {about.story.paragraphs.map((p) => (
+            <p class="text-text-secondary leading-relaxed mb-4 last:mb-0">{p}</p>
+          ))}
+          <p class="mt-6 text-sm text-text-muted">
+            — {site.therapist.name}, {site.therapist.credentials}
+          </p>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Values -->
+  <Section background="alt" padding="lg">
+    <Container>
+      <h2 class="font-heading text-2xl sm:text-3xl font-medium text-text text-center mb-10 animate-on-scroll">
+        {about.values.heading}
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 max-w-4xl mx-auto">
+        {about.values.items.map((item, index) => (
+          <div class="animate-on-scroll" style={`transition-delay: ${index * 0.08}s`}>
+            <Card padding="md">
+              <div class="w-8 h-0.5 bg-sage/40 rounded-full mb-4"></div>
+              <h3 class="font-heading text-lg font-medium text-text mb-2">{item.title}</h3>
+              <p class="text-sm text-text-secondary leading-relaxed">{item.description}</p>
+            </Card>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <!-- What it feels like -->
+  <Section background="default" padding="lg">
+    <Container narrow>
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-center">
+        <div class="lg:col-span-3 animate-on-scroll">
+          <h2 class="font-heading text-2xl sm:text-3xl font-medium text-text mb-6">
+            {about.whatItFeelsLike.heading}
+          </h2>
+          {about.whatItFeelsLike.paragraphs.map((p) => (
+            <p class="text-text-secondary leading-relaxed mb-4 last:mb-0">{p}</p>
+          ))}
+        </div>
+        <div class="lg:col-span-2 animate-on-scroll" style="transition-delay: 0.1s;">
+          <div class="rounded-[--radius-xl] overflow-hidden border border-border/40">
+            <img
+              src="/images/therapy-room-detail.jpg"
+              alt={lang === 'el' ? 'Λεπτομέρεια του χώρου θεραπείας' : 'Therapy space detail'}
+              class="w-full h-auto object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Ethics -->
+  <Section background="alt" padding="lg">
+    <Container narrow>
+      <div class="animate-on-scroll">
+        <h2 class="font-heading text-2xl sm:text-3xl font-medium text-text mb-6">
+          {about.ethics.heading}
+        </h2>
+        {about.ethics.paragraphs.map((p) => (
+          <p class="text-text-secondary leading-relaxed mb-4 last:mb-0">{p}</p>
+        ))}
+      </div>
+
+      <div class="mt-10 text-center animate-on-scroll">
+        <Button href={localizedPath(lang, '/contact')} variant="primary">{site.contactLabel}</Button>
+      </div>
+    </Container>
+  </Section>
+</Layout>

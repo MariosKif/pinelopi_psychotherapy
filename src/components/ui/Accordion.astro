@@ -1,0 +1,27 @@
+---
+interface Props {
+  items: Array<{ question: string; answer: string }>;
+  class?: string;
+}
+
+const { items, class: className = '' } = Astro.props;
+---
+
+<div class:list={['divide-y divide-border', className]}>
+  {items.map((item, index) => (
+    <details class="group" name="faq">
+      <summary class="flex items-center justify-between gap-4 py-5 cursor-pointer list-none text-left font-medium text-text transition-colors hover:text-sage-dark [&::-webkit-details-marker]:hidden">
+        <span class="text-base sm:text-lg font-heading font-medium leading-snug">{item.question}</span>
+        <span class="flex-shrink-0 w-5 h-5 text-text-muted transition-transform duration-200 group-open:rotate-45">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <line x1="10" y1="4" x2="10" y2="16" />
+            <line x1="4" y1="10" x2="16" y2="10" />
+          </svg>
+        </span>
+      </summary>
+      <div class="pb-5 pr-8 text-text-secondary leading-relaxed text-[0.94rem]">
+        {item.answer}
+      </div>
+    </details>
+  ))}
+</div>

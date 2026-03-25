@@ -1,0 +1,96 @@
+---
+import type { Lang } from '../i18n/utils';
+import { localizedPath } from '../i18n/utils';
+import Layout from '../layouts/Layout.astro';
+import { getApproach } from '../data/approach';
+import Container from '../components/ui/Container.astro';
+import Section from '../components/ui/Section.astro';
+import Card from '../components/ui/Card.astro';
+import Button from '../components/ui/Button.astro';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const approach = getApproach(lang);
+---
+
+<Layout lang={lang} title={approach.meta.title} description={approach.meta.description}>
+  <!-- Hero -->
+  <Section background="default" padding="md">
+    <Container narrow>
+      <div class="text-center animate-on-scroll">
+        <h1 class="font-heading text-4xl sm:text-5xl font-medium text-text">
+          {approach.hero.heading}
+        </h1>
+        <p class="mt-4 text-lg text-text-secondary">
+          {approach.hero.subheading}
+        </p>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Intro -->
+  <Section background="default" padding="sm">
+    <Container narrow>
+      <div class="animate-on-scroll">
+        {approach.intro.paragraphs.map((p) => (
+          <p class="text-text-secondary leading-relaxed mb-4 last:mb-0">{p}</p>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Modalities -->
+  <Section background="alt" padding="lg">
+    <Container>
+      <h2 class="font-heading text-2xl sm:text-3xl font-medium text-text text-center mb-10 animate-on-scroll">
+        {approach.modalities.heading}
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 max-w-4xl mx-auto">
+        {approach.modalities.items.map((item, index) => (
+          <div class="animate-on-scroll" style={`transition-delay: ${index * 0.08}s`}>
+            <Card padding="md">
+              <div class="w-8 h-0.5 bg-sage/40 rounded-full mb-4"></div>
+              <h3 class="font-heading text-lg font-medium text-text mb-2">{item.title}</h3>
+              <p class="text-sm text-text-secondary leading-relaxed">{item.description}</p>
+            </Card>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <!-- First session -->
+  <Section background="default" padding="lg">
+    <Container narrow>
+      <div class="animate-on-scroll">
+        <h2 class="font-heading text-2xl sm:text-3xl font-medium text-text mb-6">
+          {approach.firstSession.heading}
+        </h2>
+        {approach.firstSession.paragraphs.map((p) => (
+          <p class="text-text-secondary leading-relaxed mb-4 last:mb-0">{p}</p>
+        ))}
+        <p class="mt-5 text-sm text-text-muted italic">
+          {approach.firstSession.note}
+        </p>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Progress -->
+  <Section background="alt" padding="lg">
+    <Container narrow>
+      <div class="animate-on-scroll">
+        <h2 class="font-heading text-2xl sm:text-3xl font-medium text-text mb-6">
+          {approach.progress.heading}
+        </h2>
+        {approach.progress.paragraphs.map((p) => (
+          <p class="text-text-secondary leading-relaxed mb-4 last:mb-0">{p}</p>
+        ))}
+      </div>
+
+      <div class="mt-10 text-center animate-on-scroll">
+        <Button href={localizedPath(lang, '/contact')} variant="primary">{approach.startCta}</Button>
+      </div>
+    </Container>
+  </Section>
+</Layout>

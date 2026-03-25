@@ -1,0 +1,30 @@
+---
+import type { Lang } from '../i18n/utils';
+import Layout from '../layouts/Layout.astro';
+import { getSite } from '../data/site';
+import Hero from '../components/home/Hero.astro';
+import TrustMarkers from '../components/home/TrustMarkers.astro';
+import ServicesOverview from '../components/home/ServicesOverview.astro';
+import HowItWorks from '../components/home/HowItWorks.astro';
+import TherapistIntro from '../components/home/TherapistIntro.astro';
+import FaqTeaser from '../components/home/FaqTeaser.astro';
+import ContactCta from '../components/home/ContactCta.astro';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const site = getSite(lang);
+
+const title = lang === 'el'
+  ? 'Anemi Therapy Studio — Ψυχοθεραπεία στην Αθήνα'
+  : 'Anemi Therapy Studio — Psychotherapy in Athens';
+---
+
+<Layout lang={lang} title={title} description={site.defaultDescription}>
+  <Hero lang={lang} />
+  <TrustMarkers lang={lang} />
+  <ServicesOverview lang={lang} />
+  <HowItWorks lang={lang} />
+  <TherapistIntro lang={lang} />
+  <FaqTeaser lang={lang} />
+  <ContactCta lang={lang} />
+</Layout>

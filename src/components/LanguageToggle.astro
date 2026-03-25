@@ -1,0 +1,50 @@
+---
+import type { Lang } from '../i18n/utils';
+import { getAlternateLang, localizedPath, stripLangPrefix } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+  currentPath: string;
+}
+
+const { lang, currentPath } = Astro.props;
+const altLang = getAlternateLang(lang);
+const barePath = stripLangPrefix(currentPath);
+const altHref = localizedPath(altLang, barePath);
+---
+
+<div class="flex items-center rounded-full border border-border/60 text-xs font-medium overflow-hidden">
+  <a
+    href={lang === 'el' ? undefined : localizedPath('el', barePath)}
+    class:list={[
+      'px-2.5 py-1 transition-colors duration-200 leading-none',
+      lang === 'el' ? 'bg-sage text-white' : 'text-text-secondary hover:text-sage-dark hover:bg-sage-light/30',
+    ]}
+    aria-label="Ελληνικά"
+    aria-current={lang === 'el' ? 'true' : undefined}
+    data-lang-switch="el"
+  >
+    GR
+  </a>
+  <a
+    href={lang === 'en' ? undefined : altHref}
+    class:list={[
+      'px-2.5 py-1 transition-colors duration-200 leading-none',
+      lang === 'en' ? 'bg-sage text-white' : 'text-text-secondary hover:text-sage-dark hover:bg-sage-light/30',
+    ]}
+    aria-label="English"
+    aria-current={lang === 'en' ? 'true' : undefined}
+    data-lang-switch="en"
+  >
+    EN
+  </a>
+</div>
+
+<script>
+  document.querySelectorAll('[data-lang-switch]').forEach((el) => {
+    el.addEventListener('click', () => {
+      const lang = (el as HTMLElement).dataset.langSwitch;
+      if (lang) localStorage.setItem('lang', lang);
+    });
+  });
+</script>

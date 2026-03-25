@@ -1,0 +1,45 @@
+---
+import type { Lang } from '../../i18n/utils';
+import { getHome } from '../../data/home';
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const home = getHome(lang);
+---
+
+<Section id="how-it-works" background="alt" padding="lg">
+  <Container>
+    <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16 animate-on-scroll">
+      <h2 class="font-heading text-3xl sm:text-4xl font-medium text-text">
+        {home.howItWorks.heading}
+      </h2>
+      <p class="mt-4 text-text-secondary leading-relaxed">
+        {home.howItWorks.subheading}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 lg:gap-10 max-w-4xl mx-auto">
+      {home.howItWorks.steps.map((step, index) => (
+        <div class="relative text-center md:text-left animate-on-scroll" style={`transition-delay: ${index * 0.12}s`}>
+          {index < home.howItWorks.steps.length - 1 && (
+            <div class="hidden md:block absolute top-6 left-[calc(50%+2rem)] w-[calc(100%-4rem)] h-px bg-border" aria-hidden="true"></div>
+          )}
+
+          <div class="relative">
+            <span class="inline-block font-heading text-3xl font-medium text-sage/50 mb-3">
+              {step.number}
+            </span>
+            <h3 class="font-heading text-xl font-medium text-text mb-2">
+              {step.title}
+            </h3>
+            <p class="text-sm text-text-secondary leading-relaxed">
+              {step.description}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </Container>
+</Section>

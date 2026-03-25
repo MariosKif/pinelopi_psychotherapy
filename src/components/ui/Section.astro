@@ -1,0 +1,34 @@
+---
+interface Props {
+  id?: string;
+  class?: string;
+  background?: 'default' | 'surface' | 'alt';
+  padding?: 'sm' | 'md' | 'lg';
+}
+
+const {
+  id,
+  class: className = '',
+  background = 'default',
+  padding = 'lg',
+} = Astro.props;
+
+const bgMap = {
+  default: 'bg-background',
+  surface: 'bg-surface',
+  alt: 'bg-surface-alt',
+};
+
+const padMap = {
+  sm: 'py-12 md:py-16',
+  md: 'py-16 md:py-24',
+  lg: 'py-20 md:py-32',
+};
+---
+
+<section
+  id={id}
+  class:list={[bgMap[background], padMap[padding], className]}
+>
+  <slot />
+</section>

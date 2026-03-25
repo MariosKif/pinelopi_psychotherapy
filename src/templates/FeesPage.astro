@@ -1,0 +1,81 @@
+---
+import type { Lang } from '../i18n/utils';
+import { localizedPath } from '../i18n/utils';
+import Layout from '../layouts/Layout.astro';
+import { getFees } from '../data/fees';
+import Container from '../components/ui/Container.astro';
+import Section from '../components/ui/Section.astro';
+import Card from '../components/ui/Card.astro';
+import Button from '../components/ui/Button.astro';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const fees = getFees(lang);
+---
+
+<Layout lang={lang} title={fees.meta.title} description={fees.meta.description}>
+  <!-- Hero -->
+  <Section background="default" padding="md">
+    <Container narrow>
+      <div class="text-center animate-on-scroll">
+        <h1 class="font-heading text-4xl sm:text-5xl font-medium text-text">
+          {fees.hero.heading}
+        </h1>
+        <p class="mt-4 text-lg text-text-secondary leading-relaxed max-w-xl mx-auto">
+          {fees.hero.subheading}
+        </p>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Session fees -->
+  <Section background="default" padding="md">
+    <Container>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-3xl mx-auto">
+        {fees.sessions.map((session, index) => (
+          <div class="animate-on-scroll" style={`transition-delay: ${index * 0.08}s`}>
+            <Card padding="md" class="text-center h-full">
+              <p class="text-sm text-text-secondary mb-1">{session.type}</p>
+              <p class="font-heading text-3xl font-medium text-text my-3">{session.price}</p>
+              <p class="text-sm text-text-muted">{session.duration}</p>
+            </Card>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Additional notes -->
+  <Section background="alt" padding="lg">
+    <Container>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 max-w-4xl mx-auto">
+        {fees.notes.map((note, index) => (
+          <div class="animate-on-scroll" style={`transition-delay: ${index * 0.08}s`}>
+            <Card padding="md" class="h-full">
+              <h3 class="font-heading text-lg font-medium text-text mb-2">{note.heading}</h3>
+              <p class="text-sm text-text-secondary leading-relaxed">{note.text}</p>
+            </Card>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Cancellation policy -->
+  <Section background="default" padding="lg">
+    <Container narrow>
+      <div class="animate-on-scroll">
+        <h2 class="font-heading text-2xl sm:text-3xl font-medium text-text mb-6">
+          {fees.cancellation.heading}
+        </h2>
+        {fees.cancellation.paragraphs.map((p) => (
+          <p class="text-text-secondary leading-relaxed mb-4 last:mb-0">{p}</p>
+        ))}
+      </div>
+
+      <div class="mt-10 text-center animate-on-scroll">
+        <Button href={localizedPath(lang, '/contact')} variant="primary">{fees.appointmentCta}</Button>
+      </div>
+    </Container>
+  </Section>
+</Layout>

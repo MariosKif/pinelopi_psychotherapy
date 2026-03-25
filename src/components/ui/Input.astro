@@ -1,0 +1,38 @@
+---
+interface Props {
+  label: string;
+  name: string;
+  type?: string;
+  placeholder?: string;
+  required?: boolean;
+  class?: string;
+  id?: string;
+}
+
+const {
+  label,
+  name,
+  type = 'text',
+  placeholder = '',
+  required = false,
+  class: className = '',
+  id,
+} = Astro.props;
+
+const inputId = id || name;
+---
+
+<div class:list={['flex flex-col gap-1.5', className]}>
+  <label for={inputId} class="text-sm font-medium text-text-secondary">
+    {label}
+    {required && <span class="text-sage ml-0.5">*</span>}
+  </label>
+  <input
+    id={inputId}
+    name={name}
+    type={type}
+    placeholder={placeholder}
+    required={required}
+    class="w-full px-4 py-3 bg-surface border border-border rounded-[--radius-md] text-text placeholder:text-text-muted/60 transition-colors duration-200 hover:border-border-dark focus:border-sage focus:outline-none focus:ring-2 focus:ring-sage/20 text-sm"
+  />
+</div>

@@ -1,0 +1,56 @@
+---
+import type { Lang } from '../i18n/utils';
+import { localizedPath } from '../i18n/utils';
+import Layout from '../layouts/Layout.astro';
+import { getFaq } from '../data/faq';
+import Container from '../components/ui/Container.astro';
+import Section from '../components/ui/Section.astro';
+import Accordion from '../components/ui/Accordion.astro';
+import Button from '../components/ui/Button.astro';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const faq = getFaq(lang);
+---
+
+<Layout lang={lang} title={faq.meta.title} description={faq.meta.description}>
+  <!-- Hero -->
+  <Section background="default" padding="md">
+    <Container narrow>
+      <div class="text-center animate-on-scroll">
+        <h1 class="font-heading text-4xl sm:text-5xl font-medium text-text">
+          {faq.hero.heading}
+        </h1>
+        <p class="mt-4 text-lg text-text-secondary leading-relaxed max-w-xl mx-auto">
+          {faq.hero.subheading}
+        </p>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- FAQ Accordion -->
+  <Section background="default" padding="md">
+    <Container narrow>
+      <div class="animate-on-scroll">
+        <div class="bg-surface rounded-[--radius-lg] border border-border/60 shadow-xs px-5 sm:px-7">
+          <Accordion items={faq.items} />
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Still have questions? -->
+  <Section background="alt" padding="lg">
+    <Container narrow>
+      <div class="text-center animate-on-scroll">
+        <h2 class="font-heading text-2xl sm:text-3xl font-medium text-text mb-4">
+          {faq.stillHaveQuestions.heading}
+        </h2>
+        <p class="text-text-secondary leading-relaxed mb-6 max-w-md mx-auto">
+          {faq.stillHaveQuestions.text}
+        </p>
+        <Button href={localizedPath(lang, '/contact')} variant="primary">{faq.stillHaveQuestions.cta}</Button>
+      </div>
+    </Container>
+  </Section>
+</Layout>

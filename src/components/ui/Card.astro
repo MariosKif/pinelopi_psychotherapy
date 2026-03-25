@@ -1,0 +1,36 @@
+---
+interface Props {
+  class?: string;
+  href?: string;
+  hoverable?: boolean;
+  padding?: 'sm' | 'md' | 'lg';
+}
+
+const {
+  class: className = '',
+  href,
+  hoverable = false,
+  padding = 'md',
+} = Astro.props;
+
+const padMap = {
+  sm: 'p-4 sm:p-5',
+  md: 'p-5 sm:p-7',
+  lg: 'p-6 sm:p-9',
+};
+
+const base = `bg-surface rounded-[--radius-lg] border border-border/60 shadow-xs ${padMap[padding]}`;
+const hover = hoverable
+  ? 'transition-all duration-200 hover:shadow-card hover:border-border-dark hover:-translate-y-0.5'
+  : '';
+---
+
+{href ? (
+  <a href={href} class:list={[base, hover, 'block no-underline', className]}>
+    <slot />
+  </a>
+) : (
+  <div class:list={[base, hover, className]}>
+    <slot />
+  </div>
+)}

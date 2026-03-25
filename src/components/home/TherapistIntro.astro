@@ -1,0 +1,50 @@
+---
+import type { Lang } from '../../i18n/utils';
+import { localizedPath } from '../../i18n/utils';
+import { getHome } from '../../data/home';
+import { getSite } from '../../data/site';
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+import Button from '../ui/Button.astro';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const home = getHome(lang);
+const site = getSite(lang);
+---
+
+<Section background="default">
+  <Container>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+      <!-- Therapy room image -->
+      <div class="animate-on-scroll order-2 lg:order-1">
+        <div class="relative aspect-[4/5] max-w-sm mx-auto lg:mx-0 rounded-[--radius-xl] overflow-hidden bg-surface-alt border border-border/40">
+          <img
+            src="/images/therapy-room-wide.jpg"
+            alt={lang === 'el' ? 'Ο χώρος θεραπείας του Anemi Therapy Studio' : 'The therapy space at Anemi Therapy Studio'}
+            class="absolute inset-0 w-full h-full object-cover"
+            loading="lazy"
+          />
+          <!-- Subtle decorative accent -->
+          <div class="absolute -bottom-3 -right-3 w-full h-full rounded-[--radius-xl] border border-sage/15 -z-10" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <!-- Text content -->
+      <div class="order-1 lg:order-2 animate-on-scroll" style="transition-delay: 0.1s;">
+        <h2 class="font-heading text-3xl sm:text-4xl font-medium text-text mb-6">
+          {home.therapistIntro.heading}
+        </h2>
+        <p class="text-text-secondary leading-relaxed mb-4">
+          {home.therapistIntro.text}
+        </p>
+        <p class="text-sm text-text-muted mb-6">
+          — {site.therapist.name}, {site.therapist.credentials}
+        </p>
+        <Button href={localizedPath(lang, home.therapistIntro.cta.href)} variant="secondary">
+          {home.therapistIntro.cta.label}
+        </Button>
+      </div>
+    </div>
+  </Container>
+</Section>

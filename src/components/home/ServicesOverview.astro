@@ -1,0 +1,54 @@
+---
+import type { Lang } from '../../i18n/utils';
+import { localizedPath } from '../../i18n/utils';
+import { getHome } from '../../data/home';
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+import Card from '../ui/Card.astro';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const home = getHome(lang);
+const viewAllLabel = lang === 'el' ? 'Δείτε όλες τις υπηρεσίες' : 'View all services';
+---
+
+<Section id="services-overview" background="default">
+  <Container>
+    <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16 animate-on-scroll">
+      <h2 class="font-heading text-3xl sm:text-4xl font-medium text-text">
+        {home.servicesOverview.heading}
+      </h2>
+      <p class="mt-4 text-text-secondary leading-relaxed">
+        {home.servicesOverview.subheading}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+      {home.servicesOverview.services.map((service, index) => (
+        <div class="animate-on-scroll" style={`transition-delay: ${index * 0.08}s`}>
+          <Card href={localizedPath(lang, service.href)} hoverable padding="md">
+            <div class="w-8 h-0.5 bg-sage/40 rounded-full mb-4"></div>
+            <h3 class="font-heading text-xl font-medium text-text mb-2">
+              {service.title}
+            </h3>
+            <p class="text-sm text-text-secondary leading-relaxed">
+              {service.description}
+            </p>
+          </Card>
+        </div>
+      ))}
+    </div>
+
+    <div class="text-center mt-10 animate-on-scroll">
+      <a
+        href={localizedPath(lang, '/services')}
+        class="inline-flex items-center gap-2 text-sm font-medium text-sage-dark hover:text-sage transition-colors group"
+      >
+        {viewAllLabel}
+        <svg class="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+  </Container>
+</Section>

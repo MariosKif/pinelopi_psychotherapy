@@ -1,0 +1,90 @@
+---
+import type { Lang } from '../i18n/utils';
+import { localizedPath } from '../i18n/utils';
+import Layout from '../layouts/Layout.astro';
+import { getServices } from '../data/services';
+import Container from '../components/ui/Container.astro';
+import Section from '../components/ui/Section.astro';
+import Card from '../components/ui/Card.astro';
+import Badge from '../components/ui/Badge.astro';
+import Button from '../components/ui/Button.astro';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const services = getServices(lang);
+---
+
+<Layout lang={lang} title={services.meta.title} description={services.meta.description}>
+  <!-- Hero -->
+  <Section background="default" padding="md">
+    <Container narrow>
+      <div class="text-center animate-on-scroll">
+        <h1 class="font-heading text-4xl sm:text-5xl font-medium text-text">
+          {services.hero.heading}
+        </h1>
+        <p class="mt-4 text-lg text-text-secondary leading-relaxed max-w-xl mx-auto">
+          {services.hero.subheading}
+        </p>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Services list -->
+  <Section background="default" padding="md">
+    <Container>
+      <div class="space-y-6 max-w-4xl mx-auto">
+        {services.items.map((service, index) => (
+          <div id={service.id} class="scroll-mt-24 animate-on-scroll" style={`transition-delay: ${index * 0.06}s`}>
+            <Card padding="lg">
+              <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
+                <h2 class="font-heading text-2xl font-medium text-text">
+                  {service.title}
+                </h2>
+                <Badge variant="muted" class="self-start flex-shrink-0">
+                  {service.duration}
+                </Badge>
+              </div>
+
+              <div class="space-y-3">
+                <div>
+                  <h3 class="text-sm font-medium text-sage-dark mb-1">{services.labels.whoItsFor}</h3>
+                  <p class="text-sm text-text-secondary leading-relaxed">{service.whoItsFor}</p>
+                </div>
+                <div>
+                  <h3 class="text-sm font-medium text-sage-dark mb-1">{services.labels.whatToExpect}</h3>
+                  <p class="text-sm text-text-secondary leading-relaxed">{service.whatToExpect}</p>
+                </div>
+              </div>
+            </Card>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Online sessions -->
+  <Section background="alt" padding="lg">
+    <Container narrow>
+      <div class="text-center animate-on-scroll">
+        <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-sage/10 mb-5">
+          <svg class="w-6 h-6 text-sage" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" />
+          </svg>
+        </div>
+        <h2 class="font-heading text-2xl sm:text-3xl font-medium text-text mb-4">
+          {services.onlineSessions.heading}
+        </h2>
+        <p class="text-text-secondary leading-relaxed mb-3">
+          {services.onlineSessions.text}
+        </p>
+        <p class="text-sm text-text-muted">
+          {services.onlineSessions.note}
+        </p>
+      </div>
+
+      <div class="mt-10 text-center animate-on-scroll">
+        <Button href={localizedPath(lang, '/contact')} variant="primary">{services.bookCta}</Button>
+      </div>
+    </Container>
+  </Section>
+</Layout>

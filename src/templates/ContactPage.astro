@@ -1,0 +1,127 @@
+---
+import type { Lang } from '../i18n/utils';
+import Layout from '../layouts/Layout.astro';
+import { getContact } from '../data/contact';
+import { getSite, siteShared } from '../data/site';
+import Container from '../components/ui/Container.astro';
+import Section from '../components/ui/Section.astro';
+import Card from '../components/ui/Card.astro';
+import ContactForm from '../components/ContactForm.astro';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const contact = getContact(lang);
+const site = getSite(lang);
+const shared = siteShared;
+---
+
+<Layout lang={lang} title={contact.meta.title} description={contact.meta.description}>
+  <!-- Hero -->
+  <Section background="default" padding="md">
+    <Container narrow>
+      <div class="text-center animate-on-scroll">
+        <h1 class="font-heading text-4xl sm:text-5xl font-medium text-text">
+          {contact.hero.heading}
+        </h1>
+        <p class="mt-4 text-lg text-text-secondary leading-relaxed max-w-xl mx-auto">
+          {contact.hero.subheading}
+        </p>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Form + Sidebar -->
+  <Section background="default" padding="md">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-14">
+        <!-- Contact Form -->
+        <div class="lg:col-span-2 animate-on-scroll">
+          <Card padding="lg">
+            <ContactForm lang={lang} />
+          </Card>
+          <p class="mt-4 text-sm text-text-muted text-center lg:text-left">
+            {contact.reassurance}
+          </p>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="space-y-6 animate-on-scroll" style="transition-delay: 0.1s;">
+          <!-- Office entrance image -->
+          <div class="rounded-[--radius-lg] overflow-hidden border border-border/40">
+            <img
+              src="/images/office-entrance.jpg"
+              alt={lang === 'el' ? 'Η είσοδος του γραφείου' : 'Office entrance'}
+              class="w-full h-auto object-cover"
+              loading="lazy"
+            />
+          </div>
+
+          <!-- Contact details -->
+          <Card padding="md">
+            <h2 class="font-heading text-lg font-medium text-text mb-4">{contact.sidebar.officeDetails}</h2>
+            <div class="space-y-4 text-sm">
+              <div>
+                <p class="text-text-muted mb-1">{contact.sidebar.emailLabel}</p>
+                <a href={`mailto:${shared.contact.email}`} class="text-sage-dark hover:text-sage transition-colors">
+                  {shared.contact.email}
+                </a>
+              </div>
+              <div>
+                <p class="text-text-muted mb-1">{contact.sidebar.phoneLabel}</p>
+                <a href={`tel:${shared.contact.phone.replace(/\s/g, '')}`} class="text-sage-dark hover:text-sage transition-colors">
+                  {shared.contact.phone}
+                </a>
+              </div>
+              <div>
+                <p class="text-text-muted mb-1">{contact.sidebar.addressLabel}</p>
+                <p class="text-text-secondary leading-relaxed">
+                  {shared.contact.address.street}<br />
+                  {shared.contact.address.area}, {shared.contact.address.city}<br />
+                  {shared.contact.address.postalCode}, {shared.contact.address.country}
+                </p>
+              </div>
+            </div>
+          </Card>
+
+          <!-- Hours -->
+          <Card padding="md">
+            <h2 class="font-heading text-lg font-medium text-text mb-4">{contact.sidebar.hoursLabel}</h2>
+            <div class="space-y-2 text-sm">
+              {site.hours.map((h) => (
+                <div class="flex justify-between">
+                  <span class="text-text-secondary">{h.days}</span>
+                  <span class="text-text font-medium">{h.time}</span>
+                </div>
+              ))}
+            </div>
+          </Card>
+
+          <!-- Map placeholder -->
+          {shared.contact.mapEmbedUrl ? (
+            <div class="aspect-[4/3] rounded-[--radius-lg] overflow-hidden border border-border/60">
+              <iframe
+                src={shared.contact.mapEmbedUrl}
+                width="100%"
+                height="100%"
+                style="border:0;"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Office location map"
+              ></iframe>
+            </div>
+          ) : (
+            <div class="aspect-[4/3] rounded-[--radius-lg] bg-surface-alt border border-border/40 flex items-center justify-center">
+              <div class="text-center text-text-muted p-4">
+                <svg class="w-8 h-8 mx-auto mb-2 text-text-muted/40" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                </svg>
+                <p class="text-xs">Map embed placeholder</p>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </Container>
+  </Section>
+</Layout>

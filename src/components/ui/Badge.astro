@@ -1,0 +1,24 @@
+---
+interface Props {
+  class?: string;
+  variant?: 'sage' | 'clay' | 'muted';
+}
+
+const { class: className = '', variant = 'sage' } = Astro.props;
+
+const variants = {
+  sage: 'bg-sage-light text-sage-dark',
+  clay: 'bg-clay-light text-text-secondary',
+  muted: 'bg-surface-alt text-text-secondary',
+};
+---
+
+<span
+  class:list={[
+    'inline-flex items-center px-3 py-1 text-xs font-medium rounded-[--radius-full]',
+    variants[variant],
+    className,
+  ]}
+>
+  <slot />
+</span>

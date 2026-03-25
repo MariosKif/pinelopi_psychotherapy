@@ -1,0 +1,25 @@
+---
+import type { Lang } from '../../i18n/utils';
+import { getHome } from '../../data/home';
+import Container from '../ui/Container.astro';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const home = getHome(lang);
+---
+
+<section class="py-12 sm:py-16 bg-surface-alt border-y border-border/40">
+  <Container>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
+      {home.trustMarkers.map((marker, index) => (
+        <div class="text-center animate-on-scroll" style={`transition-delay: ${index * 0.1}s`}>
+          <div class="w-10 h-10 mx-auto mb-3 rounded-full bg-sage/10 flex items-center justify-center">
+            <div class="w-2.5 h-2.5 rounded-full bg-sage"></div>
+          </div>
+          <p class="font-heading text-lg font-medium text-text">{marker.label}</p>
+          <p class="mt-1 text-sm text-text-secondary">{marker.detail}</p>
+        </div>
+      ))}
+    </div>
+  </Container>
+</section>

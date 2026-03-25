@@ -1,0 +1,42 @@
+---
+import type { Lang } from '../../i18n/utils';
+import { localizedPath } from '../../i18n/utils';
+import { getHome } from '../../data/home';
+import { getFaq } from '../../data/faq';
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+import Accordion from '../ui/Accordion.astro';
+import Button from '../ui/Button.astro';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const home = getHome(lang);
+const faq = getFaq(lang);
+
+const featuredFaqs = home.faqTeaser.featuredIndices.map((i) => faq.items[i]);
+---
+
+<Section background="alt" padding="lg">
+  <Container narrow>
+    <div class="text-center mb-10 animate-on-scroll">
+      <h2 class="font-heading text-3xl sm:text-4xl font-medium text-text">
+        {home.faqTeaser.heading}
+      </h2>
+      <p class="mt-4 text-text-secondary leading-relaxed">
+        {home.faqTeaser.subheading}
+      </p>
+    </div>
+
+    <div class="animate-on-scroll" style="transition-delay: 0.1s;">
+      <div class="bg-surface rounded-[--radius-lg] border border-border/60 shadow-xs px-5 sm:px-7">
+        <Accordion items={featuredFaqs} />
+      </div>
+    </div>
+
+    <div class="text-center mt-8 animate-on-scroll">
+      <Button href={localizedPath(lang, home.faqTeaser.cta.href)} variant="ghost">
+        {home.faqTeaser.cta.label}
+      </Button>
+    </div>
+  </Container>
+</Section>

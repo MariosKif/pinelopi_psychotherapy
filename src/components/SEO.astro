@@ -1,0 +1,102 @@
+---
+import type { Lang } from '../i18n/utils';
+import { getSite, siteShared } from '../data/site';
+import { localizedPath, getAlternateLang, stripLangPrefix } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  canonical?: string;
+  noindex?: boolean;
+}
+
+const { lang } = Astro.props;
+const site = getSite(lang);
+const shared = siteShared;
+
+const title = Astro.props.title || site.name;
+const description = Astro.props.description || site.defaultDescription;
+const ogImage = Astro.props.ogImage || shared.meta.ogImage;
+const { canonical, noindex = false } = Astro.props;
+
+const canonicalUrl = canonical || new URL(Astro.url.pathname, shared.meta.siteUrl).href;
+const ogImageUrl = ogImage.startsWith('http') ? ogImage : new URL(ogImage, shared.meta.siteUrl).href;
+
+const altLang = getAlternateLang(lang);
+const barePath = stripLangPrefix(Astro.url.pathname);
+const elUrl = new URL(localizedPath('el', barePath), shared.meta.siteUrl).href;
+const enUrl = new URL(localizedPath('en', barePath), shared.meta.siteUrl).href;
+---
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="description" content={description} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+<link rel="canonical" href={canonicalUrl} />
+
+<!-- hreflang -->
+<link rel="alternate" hreflang="el" href={elUrl} />
+<link rel="alternate" hreflang="en" href={enUrl} />
+<link rel="alternate" hreflang="x-default" href={elUrl} />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:site_name" content={site.name} />
+<meta property="og:locale" content={lang === 'el' ? 'el_GR' : 'en_US'} />
+<meta property="og:locale:alternate" content={lang === 'el' ? 'en_US' : 'el_GR'} />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageUrl} />
+
+<!-- Structured Data: ProfessionalService -->
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'ProfessionalService',
+    name: site.name,
+    description: site.defaultDescription,
+    url: shared.meta.siteUrl,
+    telephone: shared.contact.phone,
+    email: shared.contact.email,
+    inLanguage: lang,
+    availableLanguage: ['el', 'en'],
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: shared.contact.address.street,
+      addressLocality: shared.contact.address.city,
+      postalCode: shared.contact.address.postalCode,
+      addressCountry: 'GR',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: '37.9756',
+      longitude: '23.7458',
+    },
+    openingHoursSpecification: [
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        opens: '09:00',
+        closes: '20:00',
+      },
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: 'Saturday',
+        opens: '10:00',
+        closes: '15:00',
+      },
+    ],
+    priceRange: '€€',
+    image: ogImageUrl,
+  })}
+/>
