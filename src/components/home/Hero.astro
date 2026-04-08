@@ -23,15 +23,15 @@ const home = getHome(lang);
     <source src="/videos/hero-bg.mp4" type="video/mp4" />
   </video>
   <!-- Overlay for text readability -->
-  <div class="absolute inset-0 bg-background/30" aria-hidden="true"></div>
+  <div class="absolute inset-0 bg-black/20" aria-hidden="true"></div>
 
   <Container class="relative">
     <div class="max-w-2xl mx-auto text-center">
-      <h1 class="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-[4.25rem] font-medium leading-[1.1] text-text tracking-tight animate-fade-up">
+      <h1 class="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-[4.25rem] font-medium leading-[1.1] text-white tracking-tight animate-fade-up">
         {home.hero.headline}
       </h1>
 
-      <p class="mt-6 sm:mt-8 text-base sm:text-lg text-text-secondary leading-relaxed max-w-xl mx-auto animate-fade-up" style="animation-delay: 0.1s;">
+      <p class="mt-6 sm:mt-8 text-base sm:text-lg text-white/80 leading-relaxed max-w-xl mx-auto animate-fade-up" style="animation-delay: 0.1s;">
         {home.hero.subheadline}
       </p>
 
@@ -39,7 +39,7 @@ const home = getHome(lang);
         <Button href={localizedPath(lang, home.hero.cta.primary.href)} variant="primary" size="lg">
           {home.hero.cta.primary.label}
         </Button>
-        <Button href={localizedPath(lang, home.hero.cta.secondary.href)} variant="secondary" size="lg">
+        <Button href={localizedPath(lang, home.hero.cta.secondary.href)} variant="secondary" size="lg" class="!border-white/60 !text-white hover:!bg-white/10">
           {home.hero.cta.secondary.label}
         </Button>
       </div>
@@ -48,8 +48,8 @@ const home = getHome(lang);
 
   <!-- Subtle scroll indicator -->
   <div class="absolute bottom-6 left-1/2 -translate-x-1/2 animate-fade-in hidden sm:block" style="animation-delay: 0.8s;" aria-hidden="true">
-    <div class="w-5 h-8 border border-border-dark/50 rounded-full flex justify-center pt-1.5">
-      <div class="w-1 h-2 bg-text-muted/40 rounded-full animate-bounce"></div>
+    <div class="w-5 h-8 border border-white/50 rounded-full flex justify-center pt-1.5">
+      <div class="w-1 h-2 bg-white/40 rounded-full animate-bounce"></div>
     </div>
   </div>
 </section>
