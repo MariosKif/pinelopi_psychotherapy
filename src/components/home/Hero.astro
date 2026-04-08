@@ -11,10 +11,19 @@ const home = getHome(lang);
 ---
 
 <section class="relative overflow-hidden py-20 sm:py-28 md:py-36 lg:py-44 bg-background">
-  <!-- Organic decorative blobs -->
-  <div class="absolute top-16 -right-32 w-80 h-80 bg-sage/[0.06] rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
-  <div class="absolute -bottom-24 -left-20 w-72 h-72 bg-clay/[0.06] rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
-  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-sage-light/20 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+  <!-- Background video -->
+  <video
+    class="absolute inset-0 w-full h-full object-cover"
+    autoplay
+    muted
+    loop
+    playsinline
+    aria-hidden="true"
+  >
+    <source src="/videos/hero-bg.mp4" type="video/mp4" />
+  </video>
+  <!-- Overlay for text readability -->
+  <div class="absolute inset-0 bg-background/30" aria-hidden="true"></div>
 
   <Container class="relative">
     <div class="max-w-2xl mx-auto text-center">
