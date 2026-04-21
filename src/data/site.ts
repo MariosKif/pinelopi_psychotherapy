@@ -35,7 +35,7 @@ export const siteShared = {
 /** Translatable site data */
 const siteI18n = {
   el: {
-    name: 'Anemi Therapy Studio',
+    name: 'Πηνελόπη Καρολίδη',
     tagline: 'Ένας χώρος για ανάπτυξη, θεραπεία και διαύγεια',
 
     therapist: {
@@ -68,7 +68,7 @@ const siteI18n = {
         'Αυτός ο ιστότοπος δεν παρέχει υπηρεσίες έκτακτης ανάγκης ή κρίσης. Αν βρίσκεστε σε άμεσο κίνδυνο ή αντιμετωπίζετε κρίση ψυχικής υγείας, επικοινωνήστε με τις τοπικές υπηρεσίες έκτακτης ανάγκης (112) ή μια γραμμή κρίσης.',
       privacy:
         'Η ιδιωτικότητά σας είναι σημαντική. Αυτός ο ιστότοπος δεν χρησιμοποιεί cookies παρακολούθησης. Οι πληροφορίες που μοιράζεστε μέσω της φόρμας επικοινωνίας αντιμετωπίζονται ως εμπιστευτικές.',
-      copyright: `© ${new Date().getFullYear()} Anemi Therapy Studio. Με επιφύλαξη παντός δικαιώματος.`,
+      copyright: `© ${new Date().getFullYear()} Πηνελόπη Καρολίδη. Με επιφύλαξη παντός δικαιώματος.`,
     },
 
     crisisResources: [
@@ -78,11 +78,11 @@ const siteI18n = {
     ],
 
     defaultDescription:
-      'Anemi Therapy Studio — Χώρος συστημικής ψυχοθεραπείας και συμβουλευτικής στην Αθήνα. Ατομική, ομαδική, θεραπεία ζεύγους και οικογένειας. Πηνελόπη Καρολίδη, Ψυχολόγος-Ψυχοθεραπεύτρια.',
+      'Πηνελόπη Καρολίδη, Ψυχολόγος-Ψυχοθεραπεύτρια — Συστημική ψυχοθεραπεία και συμβουλευτική στην Αθήνα. Ατομική, ομαδική, θεραπεία ζεύγους και οικογένειας.',
   },
 
   en: {
-    name: 'Anemi Therapy Studio',
+    name: 'Penelope Karolidi',
     tagline: 'A space for growth, healing, and clarity',
 
     therapist: {
@@ -115,7 +115,7 @@ const siteI18n = {
         'This website does not provide emergency or crisis services. If you are in immediate danger or experiencing a mental health crisis, please contact your local emergency services (112 in Europe) or a crisis helpline.',
       privacy:
         'Your privacy is important. This site does not use tracking cookies. Any information shared through the contact form is treated as confidential.',
-      copyright: `© ${new Date().getFullYear()} Anemi Therapy Studio. All rights reserved.`,
+      copyright: `© ${new Date().getFullYear()} Penelope Karolidi. All rights reserved.`,
     },
 
     crisisResources: [
@@ -125,7 +125,7 @@ const siteI18n = {
     ],
 
     defaultDescription:
-      'Anemi Therapy Studio — Systemic psychotherapy and counselling in Athens. Individual, group, couples, and family therapy. Penelope Karolidi, Psychologist-Psychotherapist.',
+      'Penelope Karolidi, Psychologist-Psychotherapist — Systemic psychotherapy and counselling in Athens. Individual, group, couples, and family therapy.',
   },
 };
 

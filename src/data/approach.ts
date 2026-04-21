@@ -9,7 +9,7 @@ import type { Lang } from '../i18n/utils';
 const approachI18n = {
   el: {
     meta: {
-      title: 'Προσέγγιση — Anemi Therapy Studio',
+      title: 'Προσέγγιση — Πηνελόπη Καρολίδη',
       description:
         'Συστημική ψυχοθεραπεία με στοιχεία γνωσιακής-συμπεριφορικής θεραπείας και θεραπείας μέσω τεχνών. Μάθετε πώς είναι η πρώτη σας συνεδρία.',
     },
@@ -76,7 +76,7 @@ const approachI18n = {
 
   en: {
     meta: {
-      title: 'Approach — Anemi Therapy Studio',
+      title: 'Approach — Penelope Karolidi',
       description:
         'Systemic psychotherapy with elements of CBT and arts-based therapy. Learn what your first session looks like.',
     },

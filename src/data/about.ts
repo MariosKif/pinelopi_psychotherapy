@@ -9,7 +9,7 @@ import type { Lang } from '../i18n/utils';
 const aboutI18n = {
   el: {
     meta: {
-      title: 'Σχετικά — Anemi Therapy Studio',
+      title: 'Σχετικά — Πηνελόπη Καρολίδη',
       description:
         'Γνωρίστε την Πηνελόπη Καρολίδη, Ψυχολόγο-Ψυχοθεραπεύτρια στην Αθήνα. Συστημική ψυχοθεραπεία και συμβουλευτική για ενήλικες, ζευγάρια και οικογένειες.',
     },
@@ -71,7 +71,7 @@ const aboutI18n = {
 
   en: {
     meta: {
-      title: 'About — Anemi Therapy Studio',
+      title: 'About — Penelope Karolidi',
       description:
         'Meet Penelope Karolidi, Psychologist-Psychotherapist in Athens. Systemic psychotherapy and counselling for adults, couples, and families.',
     },

@@ -9,9 +9,9 @@ import type { Lang } from '../i18n/utils';
 const contactI18n = {
   el: {
     meta: {
-      title: 'Επικοινωνία — Anemi Therapy Studio',
+      title: 'Επικοινωνία — Πηνελόπη Καρολίδη',
       description:
-        'Επικοινωνήστε με το Anemi Therapy Studio. Κλείστε ραντεβού ή κάντε μια ερώτηση. Στη Νίκαια, Πειραιάς — διαθέσιμες και online συνεδρίες.',
+        'Επικοινωνήστε με την Πηνελόπη Καρολίδη. Κλείστε ραντεβού ή κάντε μια ερώτηση. Στη Νίκαια, Πειραιάς — διαθέσιμες και online συνεδρίες.',
     },
 
     hero: {
@@ -62,9 +62,9 @@ const contactI18n = {
 
   en: {
     meta: {
-      title: 'Contact — Anemi Therapy Studio',
+      title: 'Contact — Penelope Karolidi',
       description:
-        'Get in touch with Anemi Therapy Studio. Request an appointment or ask a question. Located in Nikaia, Piraeus — online sessions also available.',
+        'Get in touch with Penelope Karolidi. Request an appointment or ask a question. Located in Nikaia, Piraeus — online sessions also available.',
     },
 
     hero: {

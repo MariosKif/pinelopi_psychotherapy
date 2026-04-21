@@ -9,9 +9,9 @@ import type { Lang } from '../i18n/utils';
 const faqI18n = {
   el: {
     meta: {
-      title: 'Συχνές Ερωτήσεις — Anemi Therapy Studio',
+      title: 'Συχνές Ερωτήσεις — Πηνελόπη Καρολίδη',
       description:
-        'Συχνές ερωτήσεις για την ψυχοθεραπεία στο Anemi Therapy Studio: τι να περιμένετε, εμπιστευτικότητα, κόστος και άλλα.',
+        'Συχνές ερωτήσεις για την ψυχοθεραπεία με την Πηνελόπη Καρολίδη: τι να περιμένετε, εμπιστευτικότητα, κόστος και άλλα.',
     },
 
     hero: {
@@ -77,9 +77,9 @@ const faqI18n = {
 
   en: {
     meta: {
-      title: 'FAQ — Anemi Therapy Studio',
+      title: 'FAQ — Penelope Karolidi',
       description:
-        'Frequently asked questions about psychotherapy at Anemi Therapy Studio: what to expect, confidentiality, fees, and more.',
+        'Frequently asked questions about psychotherapy with Penelope Karolidi: what to expect, confidentiality, fees, and more.',
     },
 
     hero: {

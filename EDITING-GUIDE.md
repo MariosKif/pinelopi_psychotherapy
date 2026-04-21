@@ -1,4 +1,4 @@
-# Content Editing Guide — Anemi Therapy Studio
+# Content Editing Guide — Πηνελόπη Καρολίδη
 
 All text content is centralised in TypeScript files inside `src/data/`.
 You do **not** need to edit components or pages to change copy.

@@ -9,7 +9,7 @@ import type { Lang } from '../i18n/utils';
 const servicesI18n = {
   el: {
     meta: {
-      title: 'Υπηρεσίες — Anemi Therapy Studio',
+      title: 'Υπηρεσίες — Πηνελόπη Καρολίδη',
       description:
         'Ατομική ψυχοθεραπεία, ομαδική θεραπεία, θεραπεία ζεύγους, θεραπεία οικογένειας και συμβουλευτική γονέων. Δια ζώσης και online συνεδρίες στην Αθήνα.',
     },
@@ -84,7 +84,7 @@ const servicesI18n = {
 
   en: {
     meta: {
-      title: 'Services — Anemi Therapy Studio',
+      title: 'Services — Penelope Karolidi',
       description:
         'Individual psychotherapy, group therapy, couples therapy, family therapy, and parent counselling. In-person and online sessions in Athens.',
     },
