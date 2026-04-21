@@ -47,6 +47,7 @@ const siteI18n = {
     },
 
     nav: [
+      { label: 'Αρχική', href: '/' },
       { label: 'Σχετικά', href: '/about' },
       { label: 'Υπηρεσίες', href: '/services' },
       { label: 'Προσέγγιση', href: '/approach' },
@@ -94,6 +95,7 @@ const siteI18n = {
     },
 
     nav: [
+      { label: 'Home', href: '/' },
       { label: 'About', href: '/about' },
       { label: 'Services', href: '/services' },
       { label: 'Approach', href: '/approach' },
