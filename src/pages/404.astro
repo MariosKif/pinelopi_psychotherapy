@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Container from '../components/ui/Container.astro';
+import Section from '../components/ui/Section.astro';
+import Button from '../components/ui/Button.astro';
+
+const lang: 'el' = 'el';
+const title = 'Η σελίδα δεν βρέθηκε — Πηνελόπη Καρολίδη';
+const description = 'Η σελίδα που αναζητάτε δεν υπάρχει ή έχει μετακινηθεί.';
+---
+
+<Layout lang={lang} title={title} description={description} noindex>
+  <Section background="default" padding="lg">
+    <Container narrow>
+      <div class="text-center py-16">
+        <p class="text-sm uppercase tracking-widest text-sage-dark mb-3">404</p>
+        <h1 class="font-heading text-4xl sm:text-5xl font-medium text-text mb-4">
+          Η σελίδα δεν βρέθηκε
+        </h1>
+        <p class="text-lg text-text-secondary leading-relaxed mb-8 max-w-md mx-auto">
+          Η σελίδα που αναζητάτε δεν υπάρχει ή έχει μετακινηθεί. Μπορείτε να επιστρέψετε στην αρχική ή να δείτε τις υπηρεσίες.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <Button href="/" variant="primary">Αρχική</Button>
+          <Button href="/services/" variant="secondary">Υπηρεσίες</Button>
+        </div>
+      </div>
+    </Container>
+  </Section>
+</Layout>

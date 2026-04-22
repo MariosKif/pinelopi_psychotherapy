@@ -5,7 +5,11 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://anemitherapy.gr',
+  site: 'https://www.pinelopikarolide.gr',
+  trailingSlash: 'always',
+  build: {
+    format: 'directory',
+  },
   i18n: {
     defaultLocale: 'el',
     locales: ['el', 'en'],

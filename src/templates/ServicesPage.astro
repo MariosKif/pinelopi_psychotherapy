@@ -12,9 +12,15 @@ import Button from '../components/ui/Button.astro';
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const services = getServices(lang);
+
+const serviceSchemaItems = services.items.map((s) => ({
+  name: s.title,
+  description: s.whatToExpect,
+  id: s.id,
+}));
 ---
 
-<Layout lang={lang} title={services.meta.title} description={services.meta.description}>
+<Layout lang={lang} title={services.meta.title} description={services.meta.description} services={serviceSchemaItems}>
   <!-- Hero -->
   <Section background="default" padding="md">
     <Container narrow>

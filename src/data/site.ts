@@ -11,12 +11,18 @@ export const siteShared = {
   contact: {
     email: 'pen.karolide@gmail.com',
     phone: '+30 698 195 0396',
+    phoneE164: '+306981950396',
     address: {
       street: 'Σαμψούντος 42',
       area: 'Νίκαια',
       city: 'Πειραιάς',
+      region: 'Αττική',
       postalCode: '184 53',
+      postalCodeRaw: '18453',
       country: 'Greece',
+      countryCode: 'GR',
+      latitude: '37.9677',
+      longitude: '23.6478',
     },
     mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3146.5!2d23.6412!3d37.9667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a1bb8e1c5b1a1f%3A0x0!2zU2FtcHNvdW50b3MgNDIsIE5pa2FpYSAxODQgNTM!5e0!3m2!1sel!2sgr!4v1',
   },
@@ -27,7 +33,7 @@ export const siteShared = {
   },
 
   meta: {
-    siteUrl: 'https://anemitherapy.gr',
+    siteUrl: 'https://www.pinelopikarolide.gr',
     ogImage: '/images/therapy-room-wide.jpg',
   },
 } as const;
@@ -75,7 +81,7 @@ const siteI18n = {
     crisisResources: [
       { name: 'Ευρωπαϊκός Αριθμός Έκτακτης Ανάγκης', phone: '112' },
       { name: 'Γραμμή Πρόληψης Αυτοκτονίας (ΕΛ)', phone: '1018' },
-      { name: 'Γραμμή Ψυχολογικής Υποστήριξης', detail: 'Καλέστε το 10306' },
+      { name: 'Γραμμή Ψυχολογικής Υποστήριξης', phone: '10306' },
     ],
 
     defaultDescription:
@@ -123,7 +129,7 @@ const siteI18n = {
     crisisResources: [
       { name: 'European Emergency Number', phone: '112' },
       { name: 'Suicide Prevention Helpline (GR)', phone: '1018' },
-      { name: 'Crisis Text Line', detail: 'Text HOME to 741741' },
+      { name: 'Psychological Support Line (GR)', phone: '10306' },
     ],
 
     defaultDescription:

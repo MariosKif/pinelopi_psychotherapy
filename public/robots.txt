@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://anemitherapy.gr/sitemap-index.xml
+Sitemap: https://www.pinelopikarolide.gr/sitemap-index.xml

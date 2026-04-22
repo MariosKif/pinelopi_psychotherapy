@@ -6,6 +6,17 @@ import SEO from '../components/SEO.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+interface ServiceItem {
+  name: string;
+  description?: string;
+  id?: string;
+}
+
 interface Props {
   lang: Lang;
   title?: string;
@@ -13,9 +24,22 @@ interface Props {
   ogImage?: string;
   canonical?: string;
   noindex?: boolean;
+  breadcrumbLabel?: string;
+  faqItems?: FaqItem[];
+  services?: ServiceItem[];
 }
 
-const { lang, title, description, ogImage, canonical, noindex } = Astro.props;
+const {
+  lang,
+  title,
+  description,
+  ogImage,
+  canonical,
+  noindex,
+  breadcrumbLabel,
+  faqItems,
+  services,
+} = Astro.props;
 const site = getSite(lang);
 const currentPath = Astro.url.pathname;
 ---
@@ -43,6 +67,9 @@ const currentPath = Astro.url.pathname;
       ogImage={ogImage}
       canonical={canonical}
       noindex={noindex}
+      breadcrumbLabel={breadcrumbLabel}
+      faqItems={faqItems}
+      services={services}
     />
   </head>
   <body class="min-h-screen bg-background text-text antialiased">

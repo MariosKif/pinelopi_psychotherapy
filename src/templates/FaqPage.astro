@@ -13,7 +13,7 @@ const { lang } = Astro.props;
 const faq = getFaq(lang);
 ---
 
-<Layout lang={lang} title={faq.meta.title} description={faq.meta.description}>
+<Layout lang={lang} title={faq.meta.title} description={faq.meta.description} faqItems={faq.items}>
   <!-- Hero -->
   <Section background="default" padding="md">
     <Container narrow>

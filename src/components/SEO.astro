@@ -3,6 +3,17 @@ import type { Lang } from '../i18n/utils';
 import { getSite, siteShared } from '../data/site';
 import { localizedPath, getAlternateLang, stripLangPrefix } from '../i18n/utils';
 
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+interface ServiceItem {
+  name: string;
+  description?: string;
+  id?: string;
+}
+
 interface Props {
   lang: Lang;
   title?: string;
@@ -10,16 +21,25 @@ interface Props {
   ogImage?: string;
   canonical?: string;
   noindex?: boolean;
+  breadcrumbLabel?: string;
+  faqItems?: FaqItem[];
+  services?: ServiceItem[];
 }
 
-const { lang } = Astro.props;
+const {
+  lang,
+  canonical,
+  noindex = false,
+  breadcrumbLabel,
+  faqItems,
+  services,
+} = Astro.props;
 const site = getSite(lang);
 const shared = siteShared;
 
 const title = Astro.props.title || site.name;
 const description = Astro.props.description || site.defaultDescription;
 const ogImage = Astro.props.ogImage || shared.meta.ogImage;
-const { canonical, noindex = false } = Astro.props;
 
 const canonicalUrl = canonical || new URL(Astro.url.pathname, shared.meta.siteUrl).href;
 const ogImageUrl = ogImage.startsWith('http') ? ogImage : new URL(ogImage, shared.meta.siteUrl).href;
@@ -28,6 +48,145 @@ const altLang = getAlternateLang(lang);
 const barePath = stripLangPrefix(Astro.url.pathname);
 const elUrl = new URL(localizedPath('el', barePath), shared.meta.siteUrl).href;
 const enUrl = new URL(localizedPath('en', barePath), shared.meta.siteUrl).href;
+
+const practiceId = `${shared.meta.siteUrl}/#practice`;
+const personId = `${shared.meta.siteUrl}/#penelope`;
+const websiteId = `${shared.meta.siteUrl}/#website`;
+const siteRoot = `${shared.meta.siteUrl}/`;
+
+const therapistJobTitle = lang === 'el' ? 'Ψυχολόγος - Ψυχοθεραπεύτρια' : 'Psychologist - Psychotherapist';
+const homeLabel = lang === 'el' ? 'Αρχική' : 'Home';
+
+// Auto-generate breadcrumbs from URL path + nav labels
+const normalizedBare = barePath.replace(/\/+$/, '') || '/';
+let breadcrumbList: { name: string; url: string }[] | null = null;
+if (normalizedBare !== '/') {
+  const homeUrl = new URL(localizedPath(lang, '/'), shared.meta.siteUrl).href;
+  const segment = normalizedBare.replace(/^\//, '').split('/')[0];
+  const navMatch = site.nav.find((n) => n.href === `/${segment}`);
+  const label =
+    breadcrumbLabel ||
+    navMatch?.label ||
+    (segment === 'contact' ? site.contactLabel : segment.charAt(0).toUpperCase() + segment.slice(1));
+  breadcrumbList = [
+    { name: homeLabel, url: homeUrl },
+    { name: label, url: canonicalUrl },
+  ];
+}
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': personId,
+  name: 'Πηνελόπη Καρολίδη',
+  alternateName: 'Penelope Karolidi',
+  jobTitle: therapistJobTitle,
+  image: ogImageUrl,
+  url: new URL(localizedPath(lang, '/about/'), shared.meta.siteUrl).href,
+  worksFor: { '@id': practiceId },
+  knowsLanguage: ['el', 'en'],
+  knowsAbout: [
+    'Systemic Psychotherapy',
+    'Individual Psychotherapy',
+    'Couples Therapy',
+    'Family Therapy',
+    'Group Therapy',
+    'Parent Counselling',
+    'Eating Disorders',
+    'Anxiety Disorders',
+    'Mood Disorders',
+  ],
+};
+
+const practiceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Psychologist',
+  '@id': practiceId,
+  name: site.name,
+  description: site.defaultDescription,
+  url: siteRoot,
+  telephone: shared.contact.phoneE164,
+  email: shared.contact.email,
+  image: [ogImageUrl],
+  priceRange: '€€',
+  medicalSpecialty: 'Psychiatric',
+  availableLanguage: ['el', 'en'],
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: shared.contact.address.street,
+    addressLocality: shared.contact.address.area,
+    addressRegion: shared.contact.address.region,
+    postalCode: shared.contact.address.postalCodeRaw,
+    addressCountry: shared.contact.address.countryCode,
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: shared.contact.address.latitude,
+    longitude: shared.contact.address.longitude,
+  },
+  areaServed: [
+    { '@type': 'City', name: 'Athens' },
+    { '@type': 'City', name: 'Piraeus' },
+    { '@type': 'City', name: 'Nikaia' },
+  ],
+  employee: { '@id': personId },
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': websiteId,
+  url: siteRoot,
+  name: site.name,
+  inLanguage: ['el', 'en'],
+  publisher: { '@id': practiceId },
+};
+
+const breadcrumbSchema = breadcrumbList
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: breadcrumbList.map((b, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: b.name,
+        item: b.url,
+      })),
+    }
+  : null;
+
+const faqSchema =
+  faqItems && faqItems.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        inLanguage: lang,
+        mainEntity: faqItems.map((item) => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: item.answer,
+          },
+        })),
+      }
+    : null;
+
+const serviceSchemas =
+  services && services.length > 0
+    ? services.map((s) => ({
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        name: s.name,
+        ...(s.description ? { description: s.description } : {}),
+        provider: { '@id': practiceId },
+        areaServed: { '@type': 'City', name: 'Athens' },
+        availableChannel: {
+          '@type': 'ServiceChannel',
+          availableLanguage: ['el', 'en'],
+        },
+      }))
+    : null;
 ---
 
 <!-- Primary Meta Tags -->
@@ -57,46 +216,15 @@ const enUrl = new URL(localizedPath('en', barePath), shared.meta.siteUrl).href;
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={ogImageUrl} />
 
-<!-- Structured Data: ProfessionalService -->
-<script
-  type="application/ld+json"
-  set:html={JSON.stringify({
-    '@context': 'https://schema.org',
-    '@type': 'ProfessionalService',
-    name: site.name,
-    description: site.defaultDescription,
-    url: shared.meta.siteUrl,
-    telephone: shared.contact.phone,
-    email: shared.contact.email,
-    inLanguage: lang,
-    availableLanguage: ['el', 'en'],
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: shared.contact.address.street,
-      addressLocality: shared.contact.address.city,
-      postalCode: shared.contact.address.postalCode,
-      addressCountry: 'GR',
-    },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: '37.9667',
-      longitude: '23.6412',
-    },
-    openingHoursSpecification: [
-      {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-        opens: '09:00',
-        closes: '20:00',
-      },
-      {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: 'Saturday',
-        opens: '10:00',
-        closes: '15:00',
-      },
-    ],
-    priceRange: '€€',
-    image: ogImageUrl,
-  })}
-/>
+<!-- Theme color -->
+<meta name="theme-color" content="#f5f1ea" />
+
+<!-- Structured Data -->
+<script type="application/ld+json" set:html={JSON.stringify(practiceSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+{breadcrumbSchema && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />}
+{faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
+{serviceSchemas && serviceSchemas.map((s) => (
+  <script type="application/ld+json" set:html={JSON.stringify(s)} />
+))}
